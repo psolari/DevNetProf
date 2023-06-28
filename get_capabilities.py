@@ -13,7 +13,7 @@ def get_device_config(device_ip):
         hostkey_verify=False
     ) as m:
         for capability in m.server_capabilities:
-            print(capability)
+            print(capability + "   " + device_ip)
 
 for device_ip in devices:
     get_device_config(device_ip)
