@@ -13,3 +13,7 @@ for capability in my_device.server_capabilities:
     print(capability)
 
 my_device.close_session()
+
+
+
+print("Hello world")
