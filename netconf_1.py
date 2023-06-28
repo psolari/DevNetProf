@@ -25,6 +25,13 @@ def get_device_config(device_ip):
     ) as m:
         for capability in m.server_capabilities:
             if "http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions" in capability:
+                print("************************************")
+                print("************************************")
+                print("************************************")
+                print(device_ip)
+                print("************************************")
+                print("************************************")
+                print("************************************")
                 my_filter = """
                 <native xmlns ="http://openconfig.net/yang/openconfig-ext">
                 </native>
