@@ -25,7 +25,7 @@ for device_ip in devices:
         for capability in m.server_capabilities:
             if "http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions" in capability:
                 my_filter = f"""
-                f'<native xmlns ={my_filter}>
+                '<native xmlns ={capability}>
                 </native>
                 """
                 results = m.get(filter=('subtree', my_filter))
