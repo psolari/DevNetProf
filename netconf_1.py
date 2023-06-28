@@ -13,7 +13,8 @@ from rich import print as rprint
 
 devices = ["192.168.2.36","192.168.2.37"]
 
-for device_ip in devices:
+
+def get_device_config(device_ip):
     with manager.connect(
         host=device_ip,
         port="830",
@@ -24,10 +25,15 @@ for device_ip in devices:
     ) as m:
         for capability in m.server_capabilities:
             if "http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions" in capability:
-                my_filter = f"""
+                filter_template  = f"""
                 <native xmlns ="{capability}">
                 </native>
                 """
+                my_filter = filter_template.format(capability=capability)
                 results = m.get(filter=('subtree', my_filter))
                 pretty_results = xml.dom.minidom.parseString(str(results)).toprettyxml()
                 rprint(pretty_results)
+
+
+for device_ip in devices:
+    get_device_config(device_ip)
