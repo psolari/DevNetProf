@@ -25,11 +25,10 @@ def get_device_config(device_ip):
     ) as m:
         for capability in m.server_capabilities:
             if "http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions" in capability:
-                filter_template  = f"""
-                <native xmlns ="{capability}">
+                my_filter = """
+                <native xmlns ="http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions&revision=2018-10-17">
                 </native>
                 """
-                my_filter = filter_template.format(capability=capability)
                 results = m.get(filter=('subtree', my_filter))
                 pretty_results = xml.dom.minidom.parseString(str(results)).toprettyxml()
                 rprint(pretty_results)
