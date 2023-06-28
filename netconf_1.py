@@ -33,7 +33,7 @@ def get_device_config(device_ip):
                 print("************************************")
                 print("************************************")
                 my_filter = """
-                <native xmlns ="http://openconfig.net/yang/openconfig-ext">
+                <native xmlns ="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
                 </native>
                 """
                 results = m.get(filter=('subtree', my_filter))
