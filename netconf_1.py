@@ -1,4 +1,6 @@
 from ncclient import manager
+import xml.dom.minidom
+from rich import print as rprint
 
 # my_device = manager.connect(
 #     host="192.168.2.38",
@@ -22,5 +24,10 @@ for device_ip in devices:
     ) as m:
         for capability in m.server_capabilities:
             if "http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions" in capability:
-                print(capability)
-
+                my_filter = f"""
+                f'<native xmlns ={my_filter}>
+                </native>
+                """
+                results = m.get(filter=('subtree', my_filter))
+                pretty_results = xml.dom.minidom.parseString(str(results)).toprettyxml()
+                rprint(pretty_results)
