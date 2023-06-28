@@ -24,21 +24,15 @@ def get_device_config(device_ip):
         hostkey_verify=False
     ) as m:
         for capability in m.server_capabilities:
-            if "http://openconfig.net/yang/openconfig-ext?module=openconfig-extensions" in capability:
-                print("************************************")
-                print("************************************")
-                print("************************************")
-                print(device_ip)
-                print("************************************")
-                print("************************************")
-                print("************************************")
+            if "http://openconfig.net/yang/interfaces" in capability:
                 my_filter = """
-                <native xmlns ="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                <native xmlns ="http://openconfig.net/yang/interfaces">
                 </native>
                 """
                 results = m.get(filter=('subtree', my_filter))
                 pretty_results = xml.dom.minidom.parseString(str(results)).toprettyxml()
                 rprint(pretty_results)
+                break
 
 
 for device_ip in devices:
